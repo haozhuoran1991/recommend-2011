@@ -10,9 +10,9 @@ class Start(object):
    
     num_of_sentences = 50
     num_results = 10
-    search_list = ["ynet", "popsi" , "nbc", "bbc", "book"]
+    search_list = ["nana" , "bbc", "wolf"]
     sites = [] 
-    text = []
+    text = ""
     try:
         while len(search_list)!=0 :
             search = search_list.pop()
@@ -31,9 +31,19 @@ class Start(object):
                 paragraphs = justext.justext(page, justext.get_stoplist('English'))
                 for paragraph in paragraphs:
                     if paragraph['class'] == 'good':
-                        print paragraph['text']
+                        text = text + paragraph['text']
+#                print text
                 print "---------------------------------------------"
             sites = []
                 
     except SearchError, e:
-        print "Search failed: %s" % e  
+        print "Search failed: %s" % e
+        
+    words = nltk.word_tokenize(text)
+    sent_tokenizer=nltk.data.load('tokenizers/punkt/english.pickle')
+    sen = sent_tokenizer.tokenize(text)
+    print len(sen)  
+    
+#    output_file = open('output.txt', 'w')
+#    for word in text:
+#        output_file.write(word + "\n")
