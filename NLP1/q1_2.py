@@ -27,18 +27,30 @@ def displayPlot1():
     pylab.xlabel('Model Size')
     pylab.ylabel('Performance')
     pylab.show()
+
+#Write a function that plots the number of words having a given number of tags. 
+#The X-axis should show the number of tags and 
+#the Y-axis the number of words having exactly this number of tags.  
+def countWordsWithDiffTags():
+    tagWords = brown.tagged_words(categories='news')
+    fd1 = nltk.FreqDist(tagWords)
+    difCouples = fd1.keys()
+    words = [w for (w,t) in difCouples]
+    fd2 = nltk.FreqDist(words)
+    cfd = nltk.ConditionalFreqDist((fd2[word], word) for word in fd2.keys())
+    return cfd
+    
     
 def countWordsWithNTags(n):
-    d=nltk.FreqDist(brown.words(categories='news'))
-    words_by_freq = list(d)
-    c =brown.tagged_words(categories='news')
-    cfd = nltk.ConditionalFreqDist(brown.tagged_words(categories='news'))
-    print cfd
+    x = 0
+    return x  
+    
+    
     
 def main():
 #    display()
 #    displayPlot1(2);
-    countWordsWithNTags(2);
-    
+    x = countWordsWithNTags(0);
+    print x
 if __name__ == '__main__':
     main() 
