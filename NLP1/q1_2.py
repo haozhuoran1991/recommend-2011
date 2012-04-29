@@ -42,15 +42,15 @@ def countWordsWithDiffTags():
     
     
 def countWordsWithNTags(n):
-    x = 0
-    return x  
+    cfd = countWordsWithDiffTags()
+    return cfd[n]  
     
     
     
 def main():
 #    display()
 #    displayPlot1(2);
-    x = countWordsWithNTags(0);
+    x = countWordsWithNTags(6);
     print x
 if __name__ == '__main__':
     main() 
