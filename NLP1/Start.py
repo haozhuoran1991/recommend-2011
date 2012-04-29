@@ -8,33 +8,33 @@ import justext
         
 class Start(object):
    
-    dst_keyword = "http://news.bbc.co.uk/2/hi/health/2284783.stm"
+    num_of_sentences = 50
     num_results = 10
-    final_results = [] 
+    search_list = ["book", "popsi" , "nbc", "algebra", "sky"]
+    sites = [] 
+    text = []
     try:
-        gs = GoogleSearch(dst_keyword)
-        gs.results_per_page = 10
-        print gs.num_results
-#        while len(final_results) < num_results:
-        results = gs.get_results()
-        
-        domains = [r.url.encode("utf8") for r in results]
-        for d in domains:
-            final_results.append(d)
-            if len(final_results) == num_results:
-                break
+        while len(text)<num_of_sentences | len(search_list)!=0 :
+            search = search_list.pop()
+            gs = GoogleSearch(search)
+            gs.results_per_page = 10
+            results = gs.get_results()
+            domains = [r.url.encode("utf8") for r in results]
+            for d in domains:
+                sites.append(d)
+                if len(sites) == num_results:
+                    break
+            print "for %s " % search + "Found %d websites:" %  len(sites)
+            for url in sites:
+                print "%s" % url
+                page = urllib2.urlopen("http://" + url).read()
+                raw = nltk.clean_html(page)
+    #            tokens = nltk.word_tokenize(raw)
+                paragraphs = justext.justext(page, justext.get_stoplist('English'))
+                for paragraph in paragraphs:
+                    if paragraph['class'] == 'good':
+                        print paragraph['text']
+                print "---------------------------------------------"
+                
     except SearchError, e:
         print "Search failed: %s" % e  
-            
-    print "Found %d websites:" % len(final_results)
-    for url in final_results:
-        print "%s" % url
-        page = urllib2.urlopen(url).read()
-        raw = nltk.clean_html(page)
-        tokens = nltk.word_tokenize(raw)
-
-        paragraphs = justext.justext(page, justext.get_stoplist('English'))
-        for paragraph in paragraphs:
-            if paragraph['class'] == 'good':
-                print paragraph['text']
-        print "---------------------------------------------"
