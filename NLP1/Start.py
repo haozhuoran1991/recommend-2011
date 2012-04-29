@@ -76,7 +76,7 @@ class Start(object):
         return self.ct2.tag(text.split())
     
     def createCorpusFile(self,tag_text):      
-        tag_file = open('tagText.txt', 'w')
+        tag_file = open('tagText', 'w')
         for w,t in tag_text:
             tag_file.write(w+"/"+t+" " )
         tag_file.close()
