@@ -9,7 +9,7 @@ import justext
 from nltk.corpus import brown
       
 def main():
-#    s = Start()
+#    s = q1_1()
 #    text = s.getTextFromWeb()
 #    clean_file = open('cleanText.txt', 'w')
 #    clean_file.write(text)
@@ -22,7 +22,7 @@ def main():
 if __name__ == '__main__':
     main() 
         
-class Start(object):
+class q1_1(object):
     brown_news_tagged = brown.tagged_sents(categories='news')
     brown_train = brown_news_tagged[100:]
     brown_test = brown_news_tagged[:100]
