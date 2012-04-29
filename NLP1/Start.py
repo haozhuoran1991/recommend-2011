@@ -4,6 +4,7 @@ from urllib import urlopen
 import urllib2
 from urlparse import urlparse
 from xgoogle.search import GoogleSearch, SearchError
+import google
 import justext
 from nltk.corpus import brown
       
@@ -14,8 +15,9 @@ def main():
 #    clean_file.write(text)
 #    clean_file.close()
 #    s.createCorpusFile(s.tagText(text))
-    x =  brown.tagged_sents(categories='news')
-    print x 
+#    d = google("nana",nltk.word_tokenize)
+#    AnalyzeResults(d) 
+    print "end"
     
 if __name__ == '__main__':
     main() 
