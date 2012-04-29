@@ -10,7 +10,7 @@ class Start(object):
    
     num_of_sentences = 50
     num_results = 10
-    search_list = ["book", "popsi" , "nbc", "algebra", "sky"]
+    search_list = ["book", "popsi" , "nbc", "a", "b"]
     sites = [] 
     text = []
     try:
@@ -19,16 +19,16 @@ class Start(object):
             gs = GoogleSearch(search)
             gs.results_per_page = 10
             results = gs.get_results()
-            domains = [r.url.encode("utf8") for r in results]
+            domains = [urlparse(r.url).netloc for r in results]
             for d in domains:
                 sites.append(d)
                 if len(sites) == num_results:
                     break
-            print "for %s " % search + "Found %d websites:" %  len(sites)
+            print "for \"%s\" " % search + "Found %d websites:" %  len(sites)
             for url in sites:
-                print "%s" % url
+                print  "http://" + url
                 page = urllib2.urlopen("http://" + url).read()
-                raw = nltk.clean_html(page)
+#                raw = nltk.clean_html(page)
     #            tokens = nltk.word_tokenize(raw)
                 paragraphs = justext.justext(page, justext.get_stoplist('English'))
                 for paragraph in paragraphs:
